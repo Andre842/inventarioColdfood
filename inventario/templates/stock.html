@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row mt-5 ms-4">
+    <div class="col-md-11">
+      <div class="card">
+        <div class="card-header">
+          <h3>Stock de Productos</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="text-center">Nombre</th>
+                <th class="text-center" style="width: 40%;">Proveedor</th> 
+                <th class="text-center" style="width: 25%;">Stock Disponible</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for producto in productos %}
+              <tr>
+                <td>{{ producto.nombre }}</td>
+                <td style="width: 40%;">{{ producto.proveedor }}</td> 
+                <td style="width: 25%;">{{ producto.stock }} kilos</td> 
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

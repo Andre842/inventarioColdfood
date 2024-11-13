@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="col-md-11 mb-4">
+
+        <div class="mt-5"></div>
+        <!-- Resumen de Stock -->
+        <div class="row ms-4">
+
+            <div class="row justify-content-between">
+                <div class="col-lg-6">
+                    <div class="card text-white bg-primary mb-4">
+                        <div class="card-header">Total de Productos en Stock</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Total de productos: {{ total_productos_en_stock }} kilos</h5>
+                            <ul class="list-group">
+                                {% for producto in productos %}
+                                <li class="list-group-item"
+                                    style="background-color: transparent; border: none; color: white;">
+                                    {{ producto.nombre }} - {{ producto.stock }} kilos
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card text-white bg-danger mb-4">
+                        <div class="card-header">Productos con Bajo Stock</div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for producto in productos_bajo_stock %}
+                                <li class="list-group-item"
+                                    style="background-color: transparent; border: none; color: white;">
+                                    {{ producto.nombre }} - {{ producto.stock }} kilos
+                                </li>
+                                {% empty %}
+                                <li class="list-group-item" style="background-color: transparent; border: none; color: white;">
+                                    No hay productos con bajo stock.
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entradas y Salidas Recientes -->
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">Entradas Recientes</div>
+                        <ul class="list-group list-group-flush">
+                            {% for entrada in entradas %}
+                            <li class="list-group-item">
+                                {{ entrada.fecha }} - {{ entrada.producto }}: {{ entrada.cantidad }} kilos
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item">No hay entradas recientes.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">Salidas Recientes</div>
+                        <ul class="list-group list-group-flush">
+                            {% for salida in salidas %}
+                            <li class="list-group-item">
+                                {{ salida.fecha }} - {{ salida.producto }}: {{ salida.cantidad }} kilos
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item">No hay salidas recientes.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedores y Clientes Destacados -->
+            <div class="row mt-4">
+                <!-- Proveedores Destacados -->
+                <div class="col-md-6">
+                    <h3>Proveedores Destacados</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            Proveedores con más productos en stock
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for proveedor in proveedores_destacados %}
+                            <li class="list-group-item">
+                                <strong>{{ proveedor.nombre }}</strong> -
+                                {{ proveedor.producto_set.count }} productos
+                                <ul>
+                                    {% for producto in proveedor.producto_set.all %}
+                                    <li>{{ producto.nombre }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item">No hay proveedores destacados.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Clientes Destacados -->
+                <div class="col-md-6">
+                    <h3>Clientes Destacados</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            Clientes con más productos comprados
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for cliente in clientes_destacados %}
+                            <li class="list-group-item">
+                                <strong>{{ cliente.nombre }}</strong> -
+                                {% if cliente.producto_mas_comprado %}
+                                {{ cliente.producto_mas_comprado.producto__nombre }} -
+                                {{ cliente.producto_mas_comprado.total_comprado }} kilos
+                                {% else %}
+                                No hay productos comprados.
+                                {% endif %}
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item">No hay clientes destacados.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

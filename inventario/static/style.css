@@ -1,0 +1,31 @@
+/* Estilos base */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Menú lateral - se muestra solo si el ancho es de al menos 1000px */
+@media (min-width: 1000px) {
+    .sidebar {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 16.6667%;
+        /* Ajuste del espacio para el menú lateral */
+    }
+}
+
+/* Estilos para pantallas menores a 1000px */
+@media (max-width: 999px) {
+    .sidebar {
+        display: none;
+        /* Ocultar el menú lateral */
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Inventario{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Vincula el archivo styles.css -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menú Lateral Fijo (oculto en pantallas pequeñas) -->
+            <div class="col-md-2 sidebar position-fixed h-100 bg-light pt-5">
+                <img src="{% static 'logo.png' %}" alt="Logo de Coldfood" class="d-block mx-auto mb-3" style="max-height: 120px;">
+                
+                <div class="list-group">
+                    <a href="{% url 'index' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-house-door"></i> Inicio
+                    </a>
+                    <a href="{% url 'productos' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-box"></i> Productos
+                    </a>
+                    <a href="{% url 'proveedores' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-person"></i> Proveedores
+                    </a>
+                    <a href="{% url 'clientes' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-person"></i> Clientes
+                    </a>
+                    <a href="{% url 'stock' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-archive"></i> Stock
+                    </a>
+                    <a href="{% url 'crear_entrada' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-box-arrow-in-right"></i> Entradas
+                    </a>
+                    <a href="{% url 'crear_salida' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-box-arrow-right"></i> Salidas
+                    </a>
+                    <a href="{% url 'lista_entradas' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-list"></i> Listado Entradas
+                    </a>
+                    <a href="{% url 'lista_salidas' %}" class="list-group-item list-group-item-action mb-2 py-2">
+                        <i class="bi bi-list"></i> Listado Salidas
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <main class="col-md-10 ms-sm-auto px-4 pt-3" style="padding-top: 30px;">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Bienvenido al Sistema de Inventario</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <!-- Hora y Fecha -->
+                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                <span id="current-time"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencia Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Script para la hora y fecha -->
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const date = now.toLocaleDateString('es-ES');
+            document.getElementById('current-time').textContent = `Fecha: ${date} | Hora: ${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>

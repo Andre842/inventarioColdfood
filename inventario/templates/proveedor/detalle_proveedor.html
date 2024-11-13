@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 ms-4">
+    <h2>Detalle del Proveedor</h2>
+    <p><strong>Nombre:</strong> {{ proveedor.nombre }}</p>
+    <p><strong>Dirección:</strong> {{ proveedor.direccion }}</p>
+    <p><strong>Teléfono:</strong> {{ proveedor.telefono }}</p>
+    <p><strong>Email:</strong> {{ proveedor.email }}</p>
+</div>
+{% endblock %}

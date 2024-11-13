@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Entrada - Sistema de Inventario{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-5 ms-4">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Registrar Nueva Entrada</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_producto" class="form-label">Producto</label>
+                            {{ form.producto }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_cantidad" class="form-label">Cantidad (kilos)</label>
+                            {{ form.cantidad }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_proveedor" class="form-label">Proveedor</label>
+                            {{ form.proveedor }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_placa" class="form-label">Placa (Opcional)</label>
+                            {{ form.placa }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_fecha" class="form-label">Fecha</label>
+                            {{ form.fecha }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Entrada</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

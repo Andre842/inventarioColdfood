@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Salidas - Sistema de Inventario{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-5 ms-4">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de Salidas</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Tabla de Salidas -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Producto</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Placa</th>
+                                <th class="text-center">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for salida in salidas %}
+                            <tr>
+                                <td>{{ salida.producto.nombre }}</td>
+                                <td>{{ salida.cliente.nombre }}</td>
+                                <td>{{ salida.cantidad }} kilos</td>
+                                <td>{{ salida.placa }}</td>
+                                <td>{{ salida.fecha }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
